@@ -1,0 +1,170 @@
+1) created the expressjsproject directory
+2) INSIDE expressjsproject creates src folder
+3) inside src created " app.js" folder
+4) install package.json file ----" npm init" 
+5) install express as gobal --- "npm install express"
+6) go to app.js and aquire express ---
+        const express = require('express');
+        const app = express();
+        that is through app we can access all methods and properties of express
+7) get propertyof app through route and callback -----
+        app.get("/",(req,res) => {
+            res.send("Welcome to Athava Deshpande Profile")
+        });
+8) now listen to the requests through port or environmental variable
+        app.listen(port ,() =>{
+            console.log(`listening to the port no ${port}`);
+        });
+
+    But when we host there they need there own port no. so ----
+    const port = process.env.PORT || 8000
+
+9) Install nodemon as a global ---npm install nodemon
+10) add one more page through "get " property that is "/about"
+11) similarly add weather page
+12) add error page ,that is iff above all three pages did`nt work then this page will open
+        use "*" for error pAGE
+        app.get("*",(req,res) => {
+            res.send("404 Error page,Oops!")
+        });
+13)make new folder in expressjsproject ----"public"
+
+14) inside public folder make css and js folder
+15) goo inside css and create one file --"style.css"
+16) go inside js  and create one file --main.js
+17) go to public and create -- index.html
+18) add images folder in public
+19) index.html -----
+        add body --- these is static web
+        add title --weather app
+        add link ----css/style.css
+        add link favicon -- href="images/logo.png" type="image/png"
+    style css---
+        add color red
+        here express say pick =up the static web and put it into the publu=ic so that it a=can access through single command
+20) now run these staic website 
+   -> use express.static
+        app.use(express.static(path))
+    -> now for path import path module
+            const path = require('path');
+    -> now we are present in src directory need to switch to public
+            const static_path = path.join(__dirname, "../public");
+    -> static_path will be the path for static.express
+            app.use(express.static(static_path)); 
+21) NOW DESIGNING THE PAGE using bootstrap
+         google bootstrap 4  compy the maxCDN links an paste it into the index.html
+            <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+22) in index.html 
+    -> add button ---<button class="btn btn-danger"> hello</button> 
+23) need bootstrap4 navbar
+        -> remove body part
+        and add here grid system generally 12 grid are there, but here we are giving 10 we want to leave one column from right and as well as left
+        Add body using grid system so that page will be in proper alginment
+24) paste the code and add some of the point to it.
+25) goo to font awesome google page select version 5.10.0 copy the first code and placed it at end of <link rel="stylesheet" --line
+26) add the conentes into html file for header
+27) ADd left and right side of page 
+        laft side has text content
+        right side has sliding images 
+                for slideing images use bootstrap method
+                --go to bootstrap4 ---components--carousel --copy "with control" code
+
+28) create the footer using :"Footer" in Html
+
+29)Now style the page in style.css
+30)now edit about page
+31) copy code of index.html and paste it into the about.html
+32) delete the CPursel data
+33) add some content
+
+
+-----ExpressJS----
+
+34) upto this static website is created, Now conterting these static to dyanamic
+35) now adding the about us page to their dome using ExpressJS here by using Handlebars
+        for that install HBS "npm install hbs"
+36) to use handlebar, compulsory created new folder by thename of "views"
+37) create same file in Views as that of public with hbs extension
+                INDEX.HBS
+                ABOUT.HBS
+                weather.hbs
+                404error.hbs
+
+38) copy the content of index and abouat.html to .hbs file respectively
+39) now telling we are using expresss engine using template and by that we are using Index.hbs and about.hbs not .html file
+                for that-- go t0 app.js
+                 // setting up handlebar or template engine
+                        app.set('view engine', 'hbs');
+                //now for using .hbs not .html  for that change response from send to render
+                  with the small change that is 'about'
+                        app.get("/about",(req,res) => {
+                        res.render('about')
+  by these we can search localhost:8000/about earlier we are nit able to search
+ 
+ now the work is done change the Views to template for further work 0r 
+ make like these template-views and Partials - inside views that files
+40) now we have return same code many times inboth the files 
+  TO make it simplier we have Partials which help us to avoid repaetedly writing codes
+   by puttong the the repeating code in one file and calling it by ots referance
+
+41) inside partials make new file "navbar.hbs " here add the repeatating code
+   and call by its referance in index and about 
+        ----{{>navbar}}----
+
+        but here we have to tell weare using partials in app.js
+
+42)  tell the path i.e it is not viewws it is partials
+
+        app.set('views', templates_path);
+        const static_path = path.join(__dirname, "../templates/views");
+        const hbs = require('hbs')
+   imported the fnt but we have to register 
+        hbs.registerPartials(partials_path)
+   define the path od partials
+        const partials_path = path.join(__dirname, "../templates/partials");
+43) Now if we do changes in navbar.hbs we can`t see nodemon is working
+ foe that command is there "  nodemon src/app.js -e js,hbs  "
+
+44) add headerlinks, footer to partials 
+45) design error page by coppying code of about
+46) design weather page by copy index page and adding discription of weathher in the style.css
+47) go to  /public/js/main.js
+         // through this you will get list of entries once we click on the submitbtn and thet entries will get store in the getInfo
+48)  In main.js connet with API nad get the info through API
+49)  put some command in the main
+
+
+
+
+---now send this code stuff to the github-----
+
+# using SSH 
+        SSH stands foor shell scripting
+        it is secure channel betwwn remote and local computer
+  what is use of ssh here??/?
+   ---for secure file transfer   which will not be encrypted using one tunnel
+
+-> Now setting up on local host
+        but will uploading there is no need of nodemodules
+  require setup
+    --gitbash
+    --vscode
+    --github account
+
+    in Vs code terminal
+     initialize git "git init"
+       =-these will get the green colour
+     git status
+     add gitignore files
+        --add file that we wnat to ignoresuch as node modules
+ 
+
+
